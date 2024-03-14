@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "GoldenGui.Hive.Functions": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7146",
+      "launchBrowser": false
+    }
+  }
+}
