@@ -9,8 +9,8 @@ var host = new HostBuilder()
 	{
 		services.AddOptions<BinanceOptions>()
 			.BindConfiguration(BinanceOptions.Section)
-			.ValidateDataAnnotations();
-		//.ValidateOnStart();
+			.ValidateDataAnnotations()
+			.ValidateOnStart();
 
 		services.AddApplicationInsightsTelemetryWorkerService();
 		services.ConfigureFunctionsApplicationInsights();
