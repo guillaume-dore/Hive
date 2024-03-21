@@ -1,4 +1,5 @@
 using Binance.Spot;
+using GoldenGui.Hive.Core.Configuration;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -9,11 +10,10 @@ public class Function1(ILoggerFactory loggerFactory, IOptions<BinanceOptions> op
 {
 	private readonly ILogger _logger = loggerFactory.CreateLogger<Function1>();
 
-	private readonly BinanceOptions _binanceConfiguration = options.Value;
+	private readonly BinanceOptions _binanceConfig = options.Value;
 
 	[Function("Function1")]
-	public void Run([TimerTrigger("20 * * * * *")] TimerInfo myTimer)
-	//public void Run([TimerTrigger("2 */5 * * * *")] TimerInfo myTimer)
+	public void Run([TimerTrigger("2 */5 * * * *")] TimerInfo myTimer)
 	{
 		_logger.LogInformation("C# Timer trigger function executed at: {Now}", DateTime.Now);
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GoldenGui.Hive.Functions;
+namespace GoldenGui.Hive.Core.Configuration;
 
 public class BinanceOptions
 {

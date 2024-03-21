@@ -1,4 +1,4 @@
-using GoldenGui.Hive.Functions;
+using GoldenGui.Hive.Core.Configuration;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
