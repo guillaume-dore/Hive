@@ -3,6 +3,7 @@ using GoldenGui.Hive.Core.Configuration;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Text.Json.Nodes;
 
 namespace GoldenGui.Hive.Functions;
 
@@ -18,8 +19,13 @@ public class Function1(ILoggerFactory loggerFactory, IOptions<BinanceOptions> op
 		_logger.LogInformation("C# Timer trigger function executed at: {Now}", DateTime.Now);
 
 		Market market = new();
-		string serverTime = market.CheckServerTime().Result.ToString();
+		var serverTimestamp = JsonNode.Parse(market.CheckServerTime().Result)!.AsObject(); // get server time as timestamp
+		DateTime serverTime = DateTimeOffset.FromUnixTimeMilliseconds((long)serverTimestamp["serverTime"]!).DateTime;
 		_logger.LogInformation("Server time: {ServerTime}", serverTime);
+
+		var result = market.SymbolPriceTicker(symbols: "[\"BTCEUR\",\"SOLEUR\",\"ETHEUR\"]").Result; // get all latest prices for symbols.
+
+		_logger.LogInformation("Ticks: {ticks}", result);
 
 		if (myTimer.ScheduleStatus is not null)
 		{
